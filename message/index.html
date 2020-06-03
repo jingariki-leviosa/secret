@@ -3,21 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>message</title>
-    <script>
-        function display() {
-           let lol=document.getElementById("lol").innerHTML;
 
-            document.getElementById("bob").innerText=lol
+    <script src="https://unpkg.com/node-forge@0.7.0/dist/forge.min.js"></script>
+
+    <script type="text/javascript">
+        function display() {
+            let lol = document.getElementById("lol").value
+
+            forge.options.usePureJavaScript = true;
+
+            let md = forge.md.sha256.create();
+            md.update(1);
+
+            document.getElementById("bob").innerText += md.digest().toHex() + "\n";
+
+            md = forge.md.sha256.create();
+            md.update(2);
+            document.getElementById("bob").innerText += md.digest().toHex();
         }
     </script>
-
 </head>
 <body>
+
+
 
 <h2> evil message</h2>
 <textarea id="lol" cols="50" rows="20"> haha lol funny </textarea>
 <br>
-<input type="button" onclick="display()" value="ok boomer" />
+<input type="button" onclick="display()" value="ok boomer"/>
 <br>
 <div id="bob"></div>
 </body>
